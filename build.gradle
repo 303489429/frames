@@ -14,6 +14,9 @@ repositories {
 }
 
 dependencies {
+    //Gradle Groovy DSL
     implementation 'org.redisson:redisson:3.10.5'
+    //Gradle Kotlin DSL
+    compile("org.projectlombok:lombok:1.18.6")
     implementation 'junit:junit:4.12'
 }
