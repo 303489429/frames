@@ -147,7 +147,7 @@ public class RedissonDemo {
     public void testGetLiveObject() {
         RLiveObjectService liveObjectService = redissonClient.getLiveObjectService();
         LedgerLiveObject digua2 = liveObjectService.get(LedgerLiveObject.class, "digua3");
-        System.out.println(digua2.getName());
+//        System.out.println(digua2.getName());
 
     }
 
