@@ -7,10 +7,9 @@ import org.redisson.api.*;
 import org.redisson.api.listener.StatusListener;
 import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.config.Config;
+import org.redisson.config.TransportMode;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
@@ -26,13 +25,15 @@ public class RedissonDemo {
     static {
         try {
             URL resource = RedissonDemo.class.getClassLoader().getResource("singleNodeConfig.json");
-            Config config = Config.fromJSON(new File(resource.toURI()));
+//            Config config = Config.fromJSON(new File(resource.toURI()));
+            Config config = new Config();
+            config.setTransportMode(TransportMode.KQUEUE);
+            config.useClusterServers()
+                    .addNodeAddress("redis://127.0.0.1:6379");
             //采用JackSon序列化方式
             config.setCodec(new JsonJacksonCodec()) ;
             redissonClient = Redisson.create(config);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (URISyntaxException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
